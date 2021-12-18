@@ -164,39 +164,72 @@ const Home = (props: HomeProps) => {
         props.connection,
     ]);
 
+    const ColorButton = styled(Button)(({theme}) => ({
+
+        backgroundColor: "rgba(25, 200, 255, 0.1)",
+        color: "white",
+        '&:hover': {
+            color: "rgba(100, 100, 255, 0.8)",
+            backgroundColor: "pink"
+        },
+    }));
+
+    const MenuButton = styled(Button)(({theme}) => ({
+        color: "white",
+        backgroundColor: "none",
+        '&:hover': {
+            backgroundColor: "pink",
+            color: "rgba(100, 100, 255, 0.8)"
+        },
+    }));
 
     const SolIcon: React.FC = (): ReactElement => {
         return <img
-            style={{"width":"25px", "transform": "translateY(5px)"}}
+            style={{"width": "25px", "transform": "translateY(5px)"}}
             src={"https://s2.coinmarketcap.com/static/img/coins/64x64/5426.png"}/>
     }
 
+    useEffect(() => {
+        document.title = "Join Myrill"
+    }, []);
+
     return (
         <main>
+            <div style={{"margin": "15px"}}>
+                <Grid container>
+                    <Grid item xs={6} md={8}>
+                        <img style={{"width": "50px", "transform": "translateY(10px)", "marginRight": "40px"}}
+                             src={"https://myrmidons.myrill.io/myrill-logo.svg"}/>
 
-            <Grid container>
-                <Grid item xs={6} md={8}>
-                    <a target="_blank" rel="noopener noreferrer" href={"https://marketplace.myrill.io"}>
-                        <Button className="app-btn">Marketplace</Button>
-                    </a>
-                    <a target="_blank" rel="noopener noreferrer" href={"https://myrill.io/whitepaper"}>
-                        <Button className="app-btn">Whitepaper</Button>
-                    </a>
+                        <a style={{"textDecoration": "none"}} target="_blank" rel="noopener noreferrer"
+                           href={"https://myrmidons.myrill.io/"}>
+                            <MenuButton size={"large"}>Marketplace</MenuButton>
+                        </a>
+                        <a style={{"textDecoration": "none"}} target="_blank" rel="noopener noreferrer"
+                           href={"https://myrill.io/whitepaper"}>
+                            <MenuButton size={"large"}>Whitepaper</MenuButton>
+                        </a>
 
-                    <a target="_blank" rel="noopener noreferrer" href={"https://myrill.io/club"}>
-                        <Button className="app-btn">Myrill Club</Button>
-                    </a>
+                        <a style={{"textDecoration": "none"}} target="_blank" rel="noopener noreferrer"
+                           href={"https://myrill.io/club"}>
+                            <MenuButton size={"large"}>Myrill Club</MenuButton>
+                        </a>
+                    </Grid>
+                    <Grid item xs={6} md={4}>
+
+                        <div className={"walletDiv"}>
+                            {wallet && (
+                                <p>
+                                    Wallet {shortenAddress(wallet.publicKey.toBase58() || "")}
+                                    <div style={{"marginRight": "10px"}}></div>
+                                    <SolIcon/> {(balance || 0).toLocaleString()}
+
+                                </p>
+                            )}
+                        </div>
+                    </Grid>
                 </Grid>
-                <Grid item xs={6} md={4}>
-
-                    <div className={"walletDiv"}>
-                        {wallet && (
-                            <p>Wallet {shortenAddress(wallet.publicKey.toBase58() || "")} <SolIcon/> {(balance || 0).toLocaleString()}</p>
-                        )}
-                    </div>
-                </Grid>
-            </Grid>
-
+            </div>
             {/*<div*/}
             {/*    style={{*/}
             {/*        fontSize: "25px",*/}
@@ -210,7 +243,7 @@ const Home = (props: HomeProps) => {
 
             {/*</div>*/}
 
-            <div className="space-90"></div>
+            <div className="space-30"></div>
 
             {/*<Grid container spacing={2}>*/}
             <div className={"mintDiv"}>
@@ -237,7 +270,7 @@ const Home = (props: HomeProps) => {
                         {!wallet ? (
                             <ConnectButton>Connect Wallet</ConnectButton>
                         ) : (
-                            <MintButton
+                            <ColorButton
                                 disabled={isSoldOut || isMinting || !isActive}
                                 onClick={onMint}
                                 variant="contained"
@@ -258,7 +291,7 @@ const Home = (props: HomeProps) => {
                                         renderer={renderCounter}
                                     />
                                 )}
-                            </MintButton>
+                            </ColorButton>
                         )}
                     </MintContainer>
 
@@ -274,22 +307,29 @@ const Home = (props: HomeProps) => {
                             {alertState.message}
                         </Alert>
                     </Snackbar>
-                  <div className="space-30"></div>
+                    <div className="space-30"></div>
                 </div>
 
             </div>
-            <div className="space-90"></div>
+            <div className="space-30"></div>
             {/*</Grid>*/}
 
 
             <div className={"footerDiv"}>
-                <a href={'https://www.linkedin.com/company/myrill'}>Linkedin</a>
-                <a href={'https://twitter.com/myrill_io'}>Twitter</a>
-                <a href={'https://discord.gg/UQudVUA3KE'}>Discord</a>
-                <a href={'https://www.instagram.com/myrill.io/'}>Instagram</a>
+                <a style={{"margin": "10px", "textDecoration": "none"}}
+                   href={'https://www.linkedin.com/company/myrill'}><MenuButton size={"large"}>Linkedin</MenuButton></a>
+
+                <a style={{"margin": "10px", "textDecoration": "none"}}
+                   href={'https://twitter.com/myrill_io'}><MenuButton size={"large"}>Twitter</MenuButton></a>
+
+                <a style={{"margin": "10px", "textDecoration": "none"}}
+                   href={'https://discord.gg/UQudVUA3KE'}><MenuButton size={"large"}>Discord</MenuButton></a>
+
+                <a style={{"margin": "10px", "textDecoration": "none"}}
+                   href={'https://www.instagram.com/myrill.io/'}><MenuButton size={"large"}>Instagram</MenuButton></a>
 
             </div>
-
+            <div className="space-30"></div>
         </main>
     );
 };

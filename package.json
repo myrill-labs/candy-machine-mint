@@ -33,7 +33,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "scp": "scp -r build/* ncarrara@myrill.io:/home/ncarrara/myrill/candy-machine-mint/public",
+    "scp-serverjs": "scp server.js ncarrara@myrill.io:/home/ncarrara/myrill/candy-machine-mint/server.js",
+    "deploy:google": "yarn build && yarn scp && yarn scp-serverjs"
   },
   "eslintConfig": {
     "extends": [

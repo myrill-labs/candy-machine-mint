@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    font-family: Monserrat,sans-serif;
+    font-family: Monserrat, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: #062489;
@@ -8,7 +8,7 @@ body {
 }
 
 code {
-    font-family:  Monserrat,sans-serif;
+    font-family: Monserrat, sans-serif;
 }
 
 .mintDiv {
@@ -20,6 +20,11 @@ code {
     border-radius: 25px;
     background-color: rgba(100, 100, 255, 0.1);
 
+}
+
+.menubutton {
+    font-family: Monserrat, sans-serif;
+    font-size: 15px;
 }
 
 .NFT {
@@ -47,6 +52,6 @@ code {
     font-family: Monserrat, sans-serif;
 }
 
-.footerDiv{
+.footerDiv {
     text-align: center;
 }
