@@ -1,13 +1,10 @@
-import {useEffect, useState} from "react";
+import {ReactElement, useEffect, useState} from "react";
 import styled from "styled-components";
 import Countdown from "react-countdown";
 import {Button, CircularProgress, Grid, Snackbar} from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
-
 import * as anchor from "@project-serum/anchor";
-
 import {LAMPORTS_PER_SOL} from "@solana/web3.js";
-
 import {useAnchorWallet} from "@solana/wallet-adapter-react";
 import {WalletDialogButton} from "@solana/wallet-adapter-material-ui";
 
@@ -26,8 +23,6 @@ const CounterText = styled.span``; // add your styles here
 const MintContainer = styled.div``; // add your styles here
 
 const MintButton = styled(Button)`
-color:blue;
-background-color:pink
 
 `; // add your styles here
 
@@ -169,80 +164,131 @@ const Home = (props: HomeProps) => {
         props.connection,
     ]);
 
+
+    const SolIcon: React.FC = (): ReactElement => {
+        return <img
+            style={{"width":"25px", "transform": "translateY(5px)"}}
+            src={"https://s2.coinmarketcap.com/static/img/coins/64x64/5426.png"}/>
+    }
+
     return (
         <main>
-            <div className="space-90"></div>
 
-            <Grid container spacing={2}>
-                <div className={"mintDiv"}>
-                    <div className="space-30"></div>
+            <Grid container>
+                <Grid item xs={6} md={8}>
+                    <a target="_blank" rel="noopener noreferrer" href={"https://marketplace.myrill.io"}>
+                        <Button className="app-btn">Marketplace</Button>
+                    </a>
+                    <a target="_blank" rel="noopener noreferrer" href={"https://myrill.io/whitepaper"}>
+                        <Button className="app-btn">Whitepaper</Button>
+                    </a>
 
-                    <img
-                        className={"NFT"}
-                        src={"https://arweave.net/9icLE0p82yTCnjWVW9tTSQ3NOc_ajGnuUjA5cvE2Sus?ext=png"}
-                        alt="NFT"/>
+                    <a target="_blank" rel="noopener noreferrer" href={"https://myrill.io/club"}>
+                        <Button className="app-btn">Myrill Club</Button>
+                    </a>
+                </Grid>
+                <Grid item xs={6} md={4}>
 
-                    <div className="space-10"></div>
-                    <div>
+                    <div className={"walletDiv"}>
                         {wallet && (
-                            <p>Wallet {shortenAddress(wallet.publicKey.toBase58() || "")}</p>
+                            <p>Wallet {shortenAddress(wallet.publicKey.toBase58() || "")} <SolIcon/> {(balance || 0).toLocaleString()}</p>
                         )}
-
-                        {wallet && <p>Balance: {(balance || 0).toLocaleString()} SOL</p>}
-
-                        {wallet && <p>Total Available: {itemsAvailable}</p>}
-
-                        {wallet && <p>Redeemed: {itemsRedeemed}</p>}
-
-                        {wallet && <p>Remaining: {itemsRemaining}</p>}
-
-                        <MintContainer>
-                            {!wallet ? (
-                                <ConnectButton>Connect Wallet</ConnectButton>
-                            ) : (
-                                <MintButton
-                                    disabled={isSoldOut || isMinting || !isActive}
-                                    onClick={onMint}
-                                    variant="contained"
-                                >
-                                    {isSoldOut ? (
-                                        "SOLD OUT"
-                                    ) : isActive ? (
-                                        isMinting ? (
-                                            <CircularProgress/>
-                                        ) : (
-                                            "MINT 5 SOL"
-                                        )
-                                    ) : (
-                                        <Countdown
-                                            date={startDate}
-                                            onMount={({completed}) => completed && setIsActive(true)}
-                                            onComplete={() => setIsActive(true)}
-                                            renderer={renderCounter}
-                                        />
-                                    )}
-                                </MintButton>
-                            )}
-                        </MintContainer>
-
-                        <Snackbar
-                            open={alertState.open}
-                            autoHideDuration={6000}
-                            onClose={() => setAlertState({...alertState, open: false})}
-                        >
-                            <Alert
-                                onClose={() => setAlertState({...alertState, open: false})}
-                                severity={alertState.severity}
-                            >
-                                {alertState.message}
-                            </Alert>
-                        </Snackbar>
-                        <div className="space-30"></div>
                     </div>
-
-                </div>
+                </Grid>
             </Grid>
 
+            {/*<div*/}
+            {/*    style={{*/}
+            {/*        fontSize: "25px",*/}
+            {/*        margin: "5px",*/}
+            {/*        display: 'flex',*/}
+            {/*        flexDirection: 'row',*/}
+            {/*    }}*/}
+            {/*>*/}
+            {/*  */}
+
+
+            {/*</div>*/}
+
+            <div className="space-90"></div>
+
+            {/*<Grid container spacing={2}>*/}
+            <div className={"mintDiv"}>
+                <div className="space-30"></div>
+
+                <img
+                    className={"NFT"}
+                    src={"https://arweave.net/9icLE0p82yTCnjWVW9tTSQ3NOc_ajGnuUjA5cvE2Sus?ext=png"}
+                    alt="NFT"/>
+
+                <div className="space-10"></div>
+                <div>
+
+
+                    {wallet && <p>Total Available: {itemsAvailable}</p>}
+
+                    {wallet && <p>Redeemed: {itemsRedeemed}</p>}
+
+                    {wallet && <p>Remaining: {itemsRemaining}</p>}
+
+                    <p>price: <SolIcon/> 5 </p>
+
+                    <MintContainer>
+                        {!wallet ? (
+                            <ConnectButton>Connect Wallet</ConnectButton>
+                        ) : (
+                            <MintButton
+                                disabled={isSoldOut || isMinting || !isActive}
+                                onClick={onMint}
+                                variant="contained"
+                            >
+                                {isSoldOut ? (
+                                    "SOLD OUT"
+                                ) : isActive ? (
+                                    isMinting ? (
+                                        <CircularProgress/>
+                                    ) : (
+                                        "BUY NFT"
+                                    )
+                                ) : (
+                                    <Countdown
+                                        date={startDate}
+                                        onMount={({completed}) => completed && setIsActive(true)}
+                                        onComplete={() => setIsActive(true)}
+                                        renderer={renderCounter}
+                                    />
+                                )}
+                            </MintButton>
+                        )}
+                    </MintContainer>
+
+                    <Snackbar
+                        open={alertState.open}
+                        autoHideDuration={6000}
+                        onClose={() => setAlertState({...alertState, open: false})}
+                    >
+                        <Alert
+                            onClose={() => setAlertState({...alertState, open: false})}
+                            severity={alertState.severity}
+                        >
+                            {alertState.message}
+                        </Alert>
+                    </Snackbar>
+                  <div className="space-30"></div>
+                </div>
+
+            </div>
+            <div className="space-90"></div>
+            {/*</Grid>*/}
+
+
+            <div className={"footerDiv"}>
+                <a href={'https://www.linkedin.com/company/myrill'}>Linkedin</a>
+                <a href={'https://twitter.com/myrill_io'}>Twitter</a>
+                <a href={'https://discord.gg/UQudVUA3KE'}>Discord</a>
+                <a href={'https://www.instagram.com/myrill.io/'}>Instagram</a>
+
+            </div>
 
         </main>
     );

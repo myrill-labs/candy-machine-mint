@@ -1,8 +1,6 @@
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    font-family: Monserrat,sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: #062489;
@@ -10,13 +8,13 @@ body {
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family:  Monserrat,sans-serif;
 }
 
 .mintDiv {
     /*max-width: 300px;*/
     margin: auto;
+    max-width: 356px;
     text-align: center;
     width: 75%;
     border-radius: 25px;
@@ -25,7 +23,8 @@ code {
 }
 
 .NFT {
-    /*max-width: 256px;*/
+    border-radius: 10px;
+    max-width: 256px;
     width: 50%;
     image-rendering: pixelated;
 }
@@ -37,6 +36,17 @@ code {
 .space-30 {
     height: 30px;
 }
+
 .space-10 {
     height: 10px;
+}
+
+.walletDiv {
+    text-align: end;
+    margin: 25px;
+    font-family: Monserrat, sans-serif;
+}
+
+.footerDiv{
+    text-align: center;
 }
