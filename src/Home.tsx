@@ -215,13 +215,14 @@ const Home = (props: HomeProps) => {
                     <img style={{"height": "22px", "position": "relative", "top": "-3px;"}} alt="logo"
                          src="https://myrill.io/assets/img/logo/logo2.svg"/>
                 </a>
-                <a href="https://myrill.io/club">Club</a>
-                <a href="https://myrill.io/whitepaper">White Paper</a>
-                <a href="https://myrill.io/mint">Buy NFT</a>
+                <a href="https://myrill.io/yield">Yield</a>
+                <a href="https://myrill.io/team">Team</a>
+                <a href="https://myrill.io/mint">Mint</a>
                 <a href="https://myrill.io/marketplace">Marketplace</a>
                 <a href="https://myrill.io/talks">Talks</a>
                 <a href="https://myrill.io/blog">Blog</a>
                 <a href="https://myrill.io/career">Career</a>
+
 
                 <a href="https://myrill.io/discord">
                     <svg height="16px" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="discord"

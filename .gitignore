@@ -26,3 +26,7 @@ yarn-error.log*
 !.env.example
 
 .idea/
+
+package-lock.json
+
+yarn.lock
