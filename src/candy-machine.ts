@@ -273,7 +273,7 @@ export const mintOneToken = async (
       rent: anchor.web3.SYSVAR_RENT_PUBKEY,
       clock: anchor.web3.SYSVAR_CLOCK_PUBKEY,
     },
-    signers: [mint],
+    signers: [mint, payer],
     instructions: [
       anchor.web3.SystemProgram.createAccount({
         fromPubkey: payer,
